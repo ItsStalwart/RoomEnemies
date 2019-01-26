@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Interagir : MonoBehaviour{
-    
+
     public Interacao_Base Target;
 
     public Interacao_Base HoldingObj;
 
     public Player myInfo;
+
+    public Animator anim_char;
 
     public void GrabObj(){
         if(!HoldingObj){
@@ -17,6 +19,7 @@ public class Interagir : MonoBehaviour{
             HoldingObj.transform.SetParent(transform);
             HoldingObj.transform.position = transform.position;
             Target = null;
+						anim_char.SetBool("Segurando",true);
         }
     }
 
@@ -26,6 +29,7 @@ public class Interagir : MonoBehaviour{
             HoldingObj.GetComponent<BoxCollider2D>().enabled = true;
             HoldingObj = null;
             //Target.transform.position = transform.position;
+						anim_char.SetBool("Segurando",false);
         }
     }
 
@@ -34,7 +38,7 @@ public class Interagir : MonoBehaviour{
     }
 
     void Start(){
-        
+
     }
 
     void Update(){

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movimento : MonoBehaviour{
-    
+
+    public Animator anim_char;
     public bool facingRight = true;
     public float moveSpeed;
     public float inputH;
@@ -14,8 +15,8 @@ public class Movimento : MonoBehaviour{
 
     private void Move(){
 		rb2d.AddForce(new Vector2(inputH*moveSpeed*10f,0));
-		//myInfo.Anim.SetBool("Run",true);
-		
+		anim_char.SetBool("Andando",true);
+
         if(rb2d.velocity.x > moveSpeed){
 			rb2d.velocity = new Vector2(moveSpeed,rb2d.velocity.y);
 		}else if(rb2d.velocity.x < -moveSpeed){
@@ -31,17 +32,17 @@ public class Movimento : MonoBehaviour{
 	}
 
     void Start(){
-        
+
     }
 
     void Update(){
 
         inputH = Input.GetAxis("Horizontal "+myInfo.playerNumber+"");
-        
+
     }
 
     void FixedUpdate(){
-        
+
         if(!myInfo.isBusy){
 			/* Mover sem deixar passar do Limite de velocidade */
 				if ((inputH <= -0.6f || inputH >= 0.6f)){
@@ -50,7 +51,7 @@ public class Movimento : MonoBehaviour{
 				else if (inputH == 0){
 					rb2d.velocity = new Vector2(Mathf.MoveTowards(rb2d.velocity.x, 0, 1.5f),rb2d.velocity.y);
 					if(rb2d.velocity.x==0){
-						//myInfo.Anim.SetBool("Run",false);
+						anim_char.SetBool("Andando",false);
 					}
 				}
 			/* Mover sem deixar passar do Limite de velocidade */
