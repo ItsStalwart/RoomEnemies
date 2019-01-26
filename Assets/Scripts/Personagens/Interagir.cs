@@ -8,6 +8,8 @@ public class Interagir : MonoBehaviour{
 
     public Interacao_Base HoldingObj;
 
+    public Player myInfo;
+
     public void GrabObj(){
         if(!HoldingObj){
             HoldingObj = Target;
@@ -27,8 +29,8 @@ public class Interagir : MonoBehaviour{
         }
     }
 
-    public void Interact(){
-
+    public void Interact(Interacao_Base Target){
+        Target.Execute(myInfo);
     }
 
     void Start(){
@@ -36,7 +38,7 @@ public class Interagir : MonoBehaviour{
     }
 
     void Update(){
-        if(Input.GetButtonDown("Grab 1")){
+        if(Input.GetButtonDown("Grab "+myInfo.playerNumber+"") && !myInfo.isBusy){
             if(!HoldingObj && Target && Target.Grabbable){
                 GrabObj();
             }else{
@@ -44,11 +46,11 @@ public class Interagir : MonoBehaviour{
             }
         }
 
-        if(Input.GetButtonDown("Use 1")){
-            if(Target){
-                print("Interagiu: "+ Target.name);
+        if(Input.GetButtonDown("Use "+myInfo.playerNumber+"")){
+            if(Target && !Target.Occupied){
+                Interact(Target);
             }else if(HoldingObj){
-                print("Interagiu: "+ HoldingObj.name);
+                Interact(HoldingObj);
             }else{
                 print("Não teve com o q interagir!");
             }

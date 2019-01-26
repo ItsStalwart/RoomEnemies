@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Interacao_Base : MonoBehaviour{
 
+    public int UseTime;
+
     public bool Occupied = false;
 
     public bool Grabbable;
     
-    protected void Execute(){}
+    public virtual void Execute(Player activePlayer){}
+
+    public void DeOccupie(){
+        Occupied = false;
+    }
     
     protected void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag == "Player"){

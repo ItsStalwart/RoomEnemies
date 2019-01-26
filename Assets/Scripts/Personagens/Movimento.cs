@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Movimento : MonoBehaviour{
     
-    public bool canMove = true;
     public bool facingRight = true;
     public float moveSpeed;
     public float inputH;
     public Rigidbody2D rb2d;
     public Transform Sprites;
+
+	public Player myInfo;
 
     private void Move(){
 		rb2d.AddForce(new Vector2(inputH*moveSpeed*10f,0));
@@ -35,13 +36,13 @@ public class Movimento : MonoBehaviour{
 
     void Update(){
 
-        inputH = Input.GetAxis("Horizontal 1");
+        inputH = Input.GetAxis("Horizontal "+myInfo.playerNumber+"");
         
     }
 
     void FixedUpdate(){
         
-        if(canMove){
+        if(!myInfo.isBusy){
 			/* Mover sem deixar passar do Limite de velocidade */
 				if ((inputH <= -0.6f || inputH >= 0.6f)){
 					Move();

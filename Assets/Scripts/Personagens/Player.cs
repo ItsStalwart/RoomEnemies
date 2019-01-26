@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour
 {
+
+    public Interagir myInteractions;
+    public Room_Base currentRoom;
     public int playerNumber;
     public bool isBusy;
     public int busyTimer;
