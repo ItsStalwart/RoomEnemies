@@ -28,8 +28,27 @@ public class Interagir : MonoBehaviour{
             HoldingObj.transform.SetParent(null);
             HoldingObj.GetComponent<BoxCollider2D>().enabled = true;
             HoldingObj = null;
-            //Target.transform.position = transform.position;
-						anim_char.SetBool("Segurando",false);
+            anim_char.SetBool("Segurando",false);
+
+            /* Interacoes de botar prato na pia
+
+                if(HoldingObj is Interacao_Prato && Target is Interacao_Pia){
+                    Interacao_Pia Pia = (Interacao_Pia)Target;
+                    Interacao_Prato[] allPratos = FindObjectsOfType<Interacao_Prato>();
+                    for(int i=0;i < Pia.SlotPos.Length;i++){
+                        bool EmptySlot = true;
+                        for(int j=0; j < allPratos.Length;j++){
+                            if(allPratos[j].transform.position == Pia.SlotPos[i].transform.position){
+                                EmptySlot = false;
+                                break;
+                            }
+                        }
+                        if(EmptySlot){
+                            HoldingObj.transform.position = Pia.SlotPos[i].transform.position;
+                        }
+                    }
+                }
+            */
         }
     }
 

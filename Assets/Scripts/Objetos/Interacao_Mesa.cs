@@ -17,7 +17,7 @@ public class Interacao_Mesa : Interacao_Base{
                     activePlayer.isBusy = true;
                     activePlayer.busyTimer = UseTime*30;
                     activePlayer.startTimer(activePlayer.busyTimer);
-                    Invoke("DeOccupie",this.UseTime);
+                    Invoke("DeOccupie",UseTime);
                 }else{
                     print("Prato s/ comida");
                 }

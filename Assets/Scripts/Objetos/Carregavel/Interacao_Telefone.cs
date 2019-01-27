@@ -28,7 +28,7 @@ public class Interacao_Telefone : Interacao_Base{
     }
 
     public override void Execute(Player activePlayer){
-        if(Battery > 0 && activePlayer.currentRoom.Dirtyness < 70){
+        if(Battery > 0 && activePlayer.currentRoom.Dirtyness < 80){
             if(activePlayer.isBusy) return;
             Occupied = true;
             activePlayer.social = 100;

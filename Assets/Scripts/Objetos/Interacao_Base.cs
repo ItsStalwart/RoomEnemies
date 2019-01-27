@@ -9,6 +9,8 @@ public class Interacao_Base : MonoBehaviour{
     public bool Occupied = false;
 
     public bool Grabbable;
+
+    public float toReduceEnjoy;
     
     public virtual void Execute(Player activePlayer){}
 
@@ -25,7 +27,9 @@ public class Interacao_Base : MonoBehaviour{
     protected void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.tag == "Player"){
             Interagir PlayerInt = other.gameObject.GetComponent<Interagir>();
-            PlayerInt.Target = null;
+            if(PlayerInt.Target == this){
+                PlayerInt.Target = null;
+            }
         }
     }
 

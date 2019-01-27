@@ -45,11 +45,14 @@ public class Movimento : MonoBehaviour{
 
         if(!myInfo.isBusy){
 			/* Mover sem deixar passar do Limite de velocidade */
+				if((inputH > 0.6f && !facingRight) || (inputH < -0.6f && facingRight)){
+					Flip();
+				}
 				if ((inputH <= -0.6f || inputH >= 0.6f)){
 					Move();
 				}
 				else if (inputH == 0){
-					rb2d.velocity = new Vector2(Mathf.MoveTowards(rb2d.velocity.x, 0, 1.5f),rb2d.velocity.y);
+					rb2d.velocity = new Vector2(Mathf.MoveTowards(rb2d.velocity.x, 0, 0.5f),rb2d.velocity.y);
 					if(rb2d.velocity.x==0){
 						anim_char.SetBool("Andando",false);
 					}

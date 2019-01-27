@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interacao_Lixo : Interacao_Base{
+public class Interacao_Rodo : Interacao_Base{
+    
     
     void Start(){
         
     }
 
-    void Update()
-    {
+    void Update(){
         
     }
 }
