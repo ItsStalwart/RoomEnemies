@@ -16,10 +16,17 @@ public class Interagir : MonoBehaviour{
         if(!HoldingObj){
             HoldingObj = Target;
             HoldingObj.GetComponent<BoxCollider2D>().enabled = false;
-            HoldingObj.transform.SetParent(transform);
-            HoldingObj.transform.position = transform.position;
+            HoldingObj.transform.SetParent(transform.Find("Sprites"));
+            HoldingObj.transform.localPosition = new Vector3(0.3f,-0.15f,0);
+            HoldingObj.GetComponent<Rigidbody2D>().isKinematic = true;
             Target = null;
-						anim_char.SetBool("Segurando",true);
+			anim_char.SetBool("Segurando",true);
+
+            if(HoldingObj is Interacao_Telefone){
+                Interacao_Telefone phone = (Interacao_Telefone) HoldingObj;
+                phone.onBase = false;
+                phone.Held = true;
+            }
         }
     }
 
@@ -27,8 +34,14 @@ public class Interagir : MonoBehaviour{
         if(HoldingObj){
             HoldingObj.transform.SetParent(null);
             HoldingObj.GetComponent<BoxCollider2D>().enabled = true;
+            HoldingObj.GetComponent<Rigidbody2D>().isKinematic = false;
             HoldingObj = null;
             anim_char.SetBool("Segurando",false);
+
+            if(HoldingObj is Interacao_Telefone){
+                Interacao_Telefone phone = (Interacao_Telefone) HoldingObj;
+                phone.Held = false;
+            }
 
             /* Interacoes de botar prato na pia
 
@@ -61,21 +74,26 @@ public class Interagir : MonoBehaviour{
     }
 
     void Update(){
-        if(Input.GetButtonDown("Grab "+myInfo.playerNumber+"") && !myInfo.isBusy){
-            if(!HoldingObj && Target && Target.Grabbable){
-                GrabObj();
-            }else{
+        if(Input.GetButtonUp("Grab "+myInfo.playerNumber+"") && !myInfo.isBusy){
+            if(Target && Target.Grabbable){
+                if(!HoldingObj){
+                    GrabObj();
+                }else{
+                    DropObj();
+                    GrabObj();
+                }
+                
+            }else if(HoldingObj && (!Target || !Target.Grabbable)){
                 DropObj();
             }
         }
 
-        if(Input.GetButtonDown("Use "+myInfo.playerNumber+"")){
+        if(Input.GetButtonUp("Use "+myInfo.playerNumber+"")){
             if(Target && !Target.Occupied){
                 Interact(Target);
-            }else if(HoldingObj){
+            }
+            if(HoldingObj){
                 Interact(HoldingObj);
-            }else{
-                print("Não teve com o q interagir!");
             }
         }
     }

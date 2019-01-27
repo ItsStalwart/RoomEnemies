@@ -7,6 +7,8 @@ public class Room_Base : MonoBehaviour{
     public float DirtynessMax = 100;
     public float Dirtyness = 0;
 
+    public float damageRatio =1;
+
     public float dirtRate;
 
     public void getDirty(){
@@ -19,6 +21,7 @@ public class Room_Base : MonoBehaviour{
     protected void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag == "Player"){
             other.gameObject.GetComponent<Player>().currentRoom = this;
+            dirtRate += other.gameObject.GetComponent<Player>().higieneRate;
         }else if(other.gameObject.tag == "SacoLixo"){
             Dirtyness += 15;
             if(Dirtyness > DirtynessMax){
@@ -30,6 +33,7 @@ public class Room_Base : MonoBehaviour{
     protected void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.tag == "Player"){
             Player Player = other.gameObject.GetComponent<Player>();
+            dirtRate -= other.gameObject.GetComponent<Player>().higieneRate;
             if(Player.currentRoom == this){
                 Player.currentRoom = null;
             }
@@ -41,11 +45,8 @@ public class Room_Base : MonoBehaviour{
         }
     }
 
-    void Start(){
-        
-    }
-
-    void Update(){
-        
-    }
+   void Update()
+   {
+       getDirty();
+   }
 }

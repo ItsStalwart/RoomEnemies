@@ -8,6 +8,7 @@ public class Interacao_Telefone : Interacao_Base{
     public float Battery;
 
     public bool onBase;
+    public bool Held;
 
     public float dischargeRate;
 
@@ -44,7 +45,11 @@ public class Interacao_Telefone : Interacao_Base{
     }
 
     void Update(){
-        
+        if(onBase || Held){
+            GetComponent<Rigidbody2D>().isKinematic = true;
+        }else{
+            GetComponent<Rigidbody2D>().isKinematic = false;
+        }
     }
 
     void FixedUpdate(){

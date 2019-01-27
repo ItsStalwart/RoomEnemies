@@ -24,6 +24,28 @@ public partial class Player : MonoBehaviour
     public float socialRate;
     public float enjoyRate;
 
+    public float happiness;
+    public float happyScore;
+
+    public float calculateHappiness(){
+        return ((((hunger/3000)*hungerRate) + ((higiene/3000)*higieneRate) + ((tired/3000)*tiredRate) + ((enjoy/3000)*enjoyRate) + ((social/3000)*socialRate))/(hungerRate+higieneRate+tiredRate+enjoyRate+socialRate));
+    }
+
+    public void calculateScore(){
+        happyScore += Time.time*calculateHappiness();
+    }
+
+    void Awake()
+    {
+        int playerCount = Input.GetJoystickNames().Length;
+        if(playerCount < playerNumber){
+            Destroy(transform.gameObject);
+        }
+    }
+    void Start(){
+        InvokeRepeating("calculateScore", 30,30);
+    }
+
     public void eat(){
         if(isBusy) return;
         this.hunger = 100;
