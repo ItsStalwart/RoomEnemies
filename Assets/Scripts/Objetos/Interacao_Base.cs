@@ -11,6 +11,12 @@ public class Interacao_Base : MonoBehaviour{
     public bool Grabbable;
 
     public float toReduceEnjoy;
+
+    public Material HighLightMat;
+
+    public Material DefaultMat;
+
+    public SpriteRenderer Sprite;
     
     public virtual void Execute(Player activePlayer){}
 
@@ -21,11 +27,13 @@ public class Interacao_Base : MonoBehaviour{
     protected void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag == "Player"){
             other.gameObject.GetComponent<Interagir>().Target = this;
+            Sprite.material = HighLightMat;
         }
     }
 
     protected void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.tag == "Player"){
+            Sprite.material = DefaultMat;
             Interagir PlayerInt = other.gameObject.GetComponent<Interagir>();
             if(PlayerInt.Target == this){
                 PlayerInt.Target = null;
