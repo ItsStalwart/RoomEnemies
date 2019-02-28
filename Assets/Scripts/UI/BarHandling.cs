@@ -19,5 +19,7 @@ public class BarHandling : MonoBehaviour
         this.gameObject.GetComponent<Image>().fillAmount = associatedPlayer.enjoy*30/3000;
         else if (barType ==4)
         this.gameObject.GetComponent<Image>().fillAmount = associatedPlayer.social*30/3000;
+        else if (barType ==5)
+        this.gameObject.GetComponent<Image>().fillAmount = associatedPlayer.calculateHappiness();
     }
 }

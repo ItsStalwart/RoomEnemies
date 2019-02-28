@@ -18,7 +18,7 @@ TagManager:
   - Grab
   - Player
   - GrabCol
-  - 
+  - Clock
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 412541343
     locked: 0

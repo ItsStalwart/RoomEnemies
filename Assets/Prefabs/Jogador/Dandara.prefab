@@ -174,11 +174,13 @@ MonoBehaviour:
   tired: 100
   social: 100
   enjoy: 100
-  hungerRate: 1
-  higieneRate: 0.8
-  tiredRate: 0.6
-  socialRate: 0.4
-  enjoyRate: 0.2
+  hungerRate: 0.01
+  higieneRate: 0.01
+  tiredRate: 0.01
+  socialRate: 0.01
+  enjoyRate: 0.01
+  happiness: 0
+  happyScore: 0
 --- !u!50 &4285301460660979422
 Rigidbody2D:
   serializedVersion: 4

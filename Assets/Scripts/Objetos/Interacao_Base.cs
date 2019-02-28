@@ -24,7 +24,7 @@ public class Interacao_Base : MonoBehaviour{
         Occupied = false;
     }
     
-    protected void OnTriggerEnter2D(Collider2D other){
+    protected void OnTriggerStay2D(Collider2D other){
         if(other.gameObject.tag == "Player"){
             other.gameObject.GetComponent<Interagir>().Target = this;
             Sprite.material = HighLightMat;

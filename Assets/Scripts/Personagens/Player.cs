@@ -28,7 +28,8 @@ public partial class Player : MonoBehaviour
     public float happyScore;
 
     public float calculateHappiness(){
-        return ((((hunger/3000)*hungerRate) + ((higiene/3000)*higieneRate) + ((tired/3000)*tiredRate) + ((enjoy/3000)*enjoyRate) + ((social/3000)*socialRate))/(hungerRate+higieneRate+tiredRate+enjoyRate+socialRate));
+        happiness = ((((hunger/100)*hungerRate) + ((higiene/100)*higieneRate) + ((tired/100)*tiredRate) + ((enjoy/100)*enjoyRate) + ((social/100)*socialRate))/(hungerRate+higieneRate+tiredRate+enjoyRate+socialRate));
+        return happiness;
     }
 
     public void calculateScore(){
@@ -43,7 +44,7 @@ public partial class Player : MonoBehaviour
         }
     }
     void Start(){
-        InvokeRepeating("calculateScore", 30,30);
+        InvokeRepeating("calculateScore", 10,10);
     }
 
     public void eat(){
@@ -109,6 +110,7 @@ public partial class Player : MonoBehaviour
 
 
     public void startTimer(int time){
+        busyClock.transform.position = transform.position + new Vector3(0,1f,0);
         busyClock.gameObject.SetActive(true);
         busyClock.gameObject.GetComponent<ClockHandler>().maxTime = time;
         busyClock.gameObject.GetComponent<ClockHandler>().curTime = time;
